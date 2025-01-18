@@ -1,0 +1,27 @@
+# Node.js
+node_modules/
+
+# TypeScript build output
+/dist/
+/build/
+
+# Logs
+*.log
+
+# Dependency directories
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# VS Code settings
+.vscode/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Tye files
+.idea/
+
+# TypeScript declarations
+*.d.ts
