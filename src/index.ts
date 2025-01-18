@@ -1,16 +1,17 @@
 import express from 'express';
+import path from 'path';
 
 const app = express();
 const port = 3000;
 
-// Math utility function
-function add(a: number, b: number): number {
-    return a + b;
-}
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, '../public')));
+
 
 app.get('/', (req, res) => {
-    res.send(`<h1>Math Utility</h1><p>3 + 5 = ${add(3, 5)}</p>`);
+    res.sendFile(path.join(__dirname, '../public/index.html'));
 });
+
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
