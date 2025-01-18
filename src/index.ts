@@ -33,6 +33,19 @@ app.post('/eea', (req, res) => {
 });
 
 
+// CRT gets and posts
+app.get('/crt', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/crt.html'));
+});
+
+app.post('/crt', (req, res) => {
+    const remainders = req.body.remainders.split(',').map(Number);
+    const moduli = req.body.moduli.split(',').map(Number);
+    const result = chineseRemainderTheorem(remainders, moduli);
+    res.json({ result });
+});
+
+
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });

@@ -11,5 +11,6 @@ export function chineseRemainderTheorem(remainders: number[], moduli: number[]):
         sum += remainders[i] * x * p;
     }
 
-    return sum % prod;
+    let result = sum % prod;
+    return result < 0 ? result + prod : result;
 }

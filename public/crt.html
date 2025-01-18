@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinese Remainder Theorem</title>
+    <script>
+        async function calculateCRT(event) {
+            event.preventDefault();
+            const remainders = document.getElementById('remainders').value;
+            const moduli = document.getElementById('moduli').value;
+            const response = await fetch('/crt', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `remainders=${remainders}&moduli=${moduli}`,
+            });
+            const result = await response.json();
+            document.getElementById('result').innerText = `Result: ${result.result}`;
+        }
+    </script>
+</head>
+<body>
+    <h1>Chinese Remainder Theorem</h1>
+    <form onsubmit="calculateCRT(event)">
+        <label for="remainders">Enter remainders (comma-separated):</label>
+        <input type="text" id="remainders" name="remainders" required>
+        <br>
+        <label for="moduli">Enter moduli (comma-separated):</label>
+        <input type="text" id="moduli" name="moduli" required>
+        <br>
+        <button type="submit">Calculate</button>
+    </form>
+    <h2>Result:</h2>
+    <p id="result"></p>
+</body>
+</html>
