@@ -1,0 +1,2 @@
+# EasyMath
+maths utility
