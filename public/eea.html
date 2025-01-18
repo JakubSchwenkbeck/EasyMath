@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Extended Euclidean Algorithm</title>
+    <link rel="stylesheet" href="styles.css">
     <script>
         async function calculateEEA(event) {
             event.preventDefault();
@@ -22,17 +23,24 @@
     </script>
 </head>
 <body>
-    <h1>Extended Euclidean Algorithm</h1>
-    <form onsubmit="calculateEEA(event)">
-        <label for="a">Enter number a:</label>
-        <input type="number" id="a" name="a" required>
-        <br>
-        <label for="b">Enter number b:</label>
-        <input type="number" id="b" name="b" required>
-        <br>
-        <button type="submit">Calculate</button>
-    </form>
-    <h2>Result:</h2>
-    <p id="result"></p>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/eea">EEA</a>
+        <a href="/crt">CRT</a>
+    </div>
+    <div class="container">
+        <h1>Extended Euclidean Algorithm</h1>
+        <form onsubmit="calculateEEA(event)">
+            <label for="a">Enter number a:</label>
+            <input type="number" id="a" name="a" required>
+            <br>
+            <label for="b">Enter number b:</label>
+            <input type="number" id="b" name="b" required>
+            <br>
+            <button type="submit">Calculate</button>
+        </form>
+        <h2>Result:</h2>
+        <p id="result"></p>
+    </div>
 </body>
 </html>
