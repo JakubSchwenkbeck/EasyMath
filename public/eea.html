@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Extended Euclidean Algorithm</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <script>
         async function calculateEEA(event) {
             event.preventDefault();
@@ -18,7 +19,22 @@
                 body: `a=${a}&b=${b}`,
             });
             const result = await response.json();
-            document.getElementById('result').innerText = `GCD: ${result.gcd}, x: ${result.x}, y: ${result.y}`;
+            document.getElementById('eea-result').innerText = `GCD(${a}, ${b}) = ${result.gcd}, x = ${result.x}, y = ${result.y}`;
+        }
+
+        async function calculateLCM(event) {
+            event.preventDefault();
+            const a = document.getElementById('lcm-a').value;
+            const b = document.getElementById('lcm-b').value;
+            const response = await fetch('/lcm', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `a=${a}&b=${b}`,
+            });
+            const result = await response.json();
+            document.getElementById('lcm-result').innerText = `LCM(${a}, ${b}) = ${result.lcm}`;
         }
     </script>
 </head>
@@ -31,16 +47,33 @@
     <div class="container">
         <h1>Extended Euclidean Algorithm</h1>
         <form onsubmit="calculateEEA(event)">
-            <label for="a">Enter number a:</label>
-            <input type="number" id="a" name="a" required>
-            <br>
-            <label for="b">Enter number b:</label>
-            <input type="number" id="b" name="b" required>
-            <br>
+            <div class="form-group">
+                <label for="a">Enter number a:</label>
+                <input type="number" id="a" name="a" required>
+            </div>
+            <div class="form-group">
+                <label for="b">Enter number b:</label>
+                <input type="number" id="b" name="b" required>
+            </div>
             <button type="submit">Calculate</button>
         </form>
         <h2>Result:</h2>
-        <p id="result"></p>
+        <p id="eea-result"></p>
+
+        <h1>Least Common Multiple</h1>
+        <form onsubmit="calculateLCM(event)">
+            <div class="form-group">
+                <label for="lcm-a">Enter number a:</label>
+                <input type="number" id="lcm-a" name="a" required>
+            </div>
+            <div class="form-group">
+                <label for="lcm-b">Enter number b:</label>
+                <input type="number" id="lcm-b" name="b" required>
+            </div>
+            <button type="submit">Calculate</button>
+        </form>
+        <h2>Result:</h2>
+        <p id="lcm-result"></p>
     </div>
 </body>
 </html>

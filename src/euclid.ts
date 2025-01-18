@@ -15,16 +15,20 @@ export function extendedEuclidean(a: number, b: number): { gcd: number, x: numbe
 }
 
 // standard Euclidean Algorithm
-export function Euclidean(a: number, b: number): { gcd: number} {
+export function gcd(a: number, b: number): number {
    // Preconditions
    assert(Number.isInteger(a) && Number.isInteger(b), 'Inputs must be integers');
    assert(a >= 0 && b >= 0, 'Inputs must be non-negative');
    
    if (b === 0) {
-       return { gcd: a};
+       return a;
    }
    if (a === 0) {
-       return { gcd: b};
+       return b;
    }
-    return Euclidean(b, a % b);
+   let res: number = gcd(b, a % b);
+   // Postconditions
+    assert(res === Math.abs(res), 'GCD must be non-negative');
+
+    return res;
 }

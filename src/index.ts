@@ -1,7 +1,8 @@
 import express from 'express';
 import path from 'path';
-import { extendedEuclidean, Euclidean } from './euclid';
+import { extendedEuclidean, gcd } from './euclid';
 import { chineseRemainderTheorem } from './crt';
+import { lcm } from './lcm';
 import bodyParser from 'body-parser';
 
 const app = express();
@@ -31,6 +32,15 @@ app.post('/eea', (req, res) => {
     const { gcd, x, y } = extendedEuclidean(a, b);
     res.json({ gcd, x, y });
 });
+
+// LCM gets and posts
+app.post('/lcm', (req,  res) => {
+    const a: number = Number(req.body.a);
+    const b: number = Number(req.body.b);
+    const result: number = lcm(a, b);
+    res.json({ lcm: result });
+});
+
 
 
 // CRT gets and posts

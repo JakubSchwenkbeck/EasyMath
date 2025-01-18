@@ -5,17 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chinese Remainder Theorem</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <script>
+        function addRow() {
+            const container = document.getElementById('crt-container');
+            const row = document.createElement('div');
+            row.className = 'form-group';
+            row.innerHTML = `
+                <label>x = <input type="number" name="remainders" required> mod <input type="number" name="moduli" required></label>
+                <button type="button" onclick="removeRow(this)">Remove</button>
+            `;
+            container.appendChild(row);
+        }
+
+        function removeRow(button) {
+            const row = button.parentNode;
+            row.parentNode.removeChild(row);
+        }
+
         async function calculateCRT(event) {
             event.preventDefault();
-            const remainders = document.getElementById('remainders').value;
-            const moduli = document.getElementById('moduli').value;
+            const remainders = Array.from(document.getElementsByName('remainders')).map(input => input.value);
+            const moduli = Array.from(document.getElementsByName('moduli')).map(input => input.value);
             const response = await fetch('/crt', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: `remainders=${remainders}&moduli=${moduli}`,
+                body: `remainders=${remainders.join(',')}&moduli=${moduli.join(',')}`,
             });
             const result = await response.json();
             document.getElementById('result').innerText = `Result: ${result.result}`;
@@ -31,12 +48,10 @@
     <div class="container">
         <h1>Chinese Remainder Theorem</h1>
         <form onsubmit="calculateCRT(event)">
-            <label for="remainders">Enter remainders (comma-separated):</label>
-            <input type="text" id="remainders" name="remainders" required>
-            <br>
-            <label for="moduli">Enter moduli (comma-separated):</label>
-            <input type="text" id="moduli" name="moduli" required>
-            <br>
+            <div id="crt-container" class="form-group">
+                <label>x = <input type="number" name="remainders" required> mod <input type="number" name="moduli" required></label>
+            </div>
+            <button type="button" onclick="addRow()">Add Row</button>
             <button type="submit">Calculate</button>
         </form>
         <h2>Result:</h2>
