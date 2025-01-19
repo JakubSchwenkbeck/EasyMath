@@ -2,22 +2,27 @@ import { extendedEuclidean,gcd } from './euclid';
 
 
 // Function to generate RSA private keys
-export function generateRSAKeys(p: number, q: number ): {publicKey: {e: number, n : number},  privateKey: number } {
-    
+export function generateRSAKeys(p: number, q: number, e : number ): {publicKey: {e: number, n : number},  privateKey: number } {
+      // Choose e such that 1 < e < phi and gcd(e, phi) = 1
+  
     // Generate RSA keys
     const n = p * q;
     const phi = (p - 1) * (q - 1);
 
-    // Choose e such that 1 < e < phi and gcd(e, phi) = 1
-    let e = 3; // Common choice for
+  
   
     // Calculate d such that (d * e) % phi = 1
-    const { x: d } = extendedEuclidean(e, phi);
+    const {y : d } = extendedEuclidean(phi, e);
 
     return {
         publicKey: { e, n },
         privateKey: d < 0 ? d + phi : d // Ensure d is positive
     };
+}
+
+export function generatePrivateKey(n : number, e: number, phi: number): number {
+    const { x: d } = extendedEuclidean(e, phi);
+    return d < 0 ? d + phi : d;
 }
 
 export function rsaEncrypt(publicKey: {e: number, n: number}, message: number): number {
@@ -58,7 +63,7 @@ export function tryCrackRSA(n : number, phi: number): {p: number, q: number} {
     let b = n - phi + 1;
     let c = 2;
 
-    let p = (-b + Math.sqrt(b**2 - 4*a*c))/(2*a);
+    let p = Math.abs(-b + Math.sqrt(b**2 - 4*n))/(2*a);
     let q = n/p;
     return {p, q};
 }

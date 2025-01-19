@@ -7,6 +7,13 @@ test('extendedEuclidean should return correct GCD and coefficients', () => {
     expect(result.y).toBe(15);
 });
 
+test('extendedEuclidean should return correct GCD and coefficients', () => {
+    const result = extendedEuclidean(60, 7);
+    expect(result.gcd).toBe(1);
+    expect(result.x).toBe(2);
+    expect(result.y).toBe(-17);
+});
+
 test('extendedEuclidean should return correct GCD and coefficients with big numbers', () => {
     const result = extendedEuclidean(5611, 1523);
     expect(result.gcd).toBe(1);

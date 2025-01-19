@@ -11,25 +11,30 @@ body {
 }
 
 h1 {
-    color: #2c3e50;
-    margin-bottom: 20px;
+    color: #e82127; /* Tesla Red */
+    margin-bottom: 40px; /* Increased margin */
     font-size: 2.5em;
 }
 
 h2 {
-    margin-top: 20px;
-    color: #2c3e50;
+    margin-top: 30px; /* Increased margin */
+    color: #e82127; /* Tesla Red */
     font-size: 1.5em;
+}
+
+h3 {
+    margin-top: 20px; /* Increased margin */
+    color: #e82127; /* Tesla Red */
+    font-size: 1.2em;
 }
 
 form {
     background: #fff;
-    padding: 20px;
+    padding: 20px; /* Adjusted padding */
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Increased shadow */
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Adjusted margin */
     transition: transform 0.3s ease;
 }
 
@@ -39,25 +44,25 @@ form:hover {
 
 label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 16px; /* Increased margin */
     font-weight: bold;
     color: #34495e;
 }
 
 input[type="number"] {
     width: calc(100% - 20px);
-    padding: 10px;
-    margin-bottom: 20px;
+    padding: 14px; /* Increased padding */
+    margin-bottom: 20px; /* Adjusted margin */
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1em;
 }
 
 button {
-    background-color: #3498db;
+    background-color: #e82127; /* Tesla Red */
     color: #fff;
     border: none;
-    padding: 10px 20px;
+    padding: 14px 28px; /* Increased padding */
     border-radius: 5px;
     cursor: pointer;
     font-size: 1em;
@@ -66,12 +71,12 @@ button {
 }
 
 button:hover {
-    background-color: #2980b9;
+    background-color: #c4161b; /* Darker Tesla Red */
 }
 
 p {
     background: #ecf0f1;
-    padding: 10px;
+    padding: 14px; /* Increased padding */
     border-radius: 5px;
     font-weight: bold;
     text-align: center;
@@ -80,21 +85,22 @@ p {
 
 .container {
     text-align: center;
-    padding: 20px;
+    padding: 40px; /* Increased padding */
+    width: 100%; /* Use full width */
 }
 
 .navbar {
-    background-color: #3498db;
-    padding: 15px;
+    background-color: #e82127; /* Tesla Red */
+    padding: 20px; /* Increased padding */
     width: 100%;
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Increased shadow */
 }
 
 .navbar a {
     color: #fff;
     text-decoration: none;
-    margin: 0 15px;
+    margin: 0 30px; /* Increased margin */
     font-size: 1.2em;
     transition: color 0.3s ease;
 }
@@ -103,14 +109,18 @@ p {
     color: #ecf0f1;
 }
 
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns */
+    gap: 40px; /* Increased gap */
+    width: 100%;
+}
+
 .card {
     background: #fff;
-    padding: 20px;
+    padding: 20px; /* Adjusted padding */
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    width: 100%;
-    margin: 20px 0;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Increased shadow */
     transition: transform 0.3s ease;
 }
 
@@ -119,20 +129,20 @@ p {
 }
 
 .card h2 {
-    color: #2c3e50;
-    margin-bottom: 10px;
+    color: #e82127; /* Tesla Red */
+    margin-bottom: 20px; /* Adjusted margin */
 }
 
 .card p {
     color: #34495e;
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Adjusted margin */
 }
 
 .card .button {
-    background-color: #3498db;
+    background-color: #e82127; /* Tesla Red */
     color: #fff;
     border: none;
-    padding: 10px 20px;
+    padding: 14px 28px; /* Increased padding */
     border-radius: 5px;
     cursor: pointer;
     font-size: 1em;
@@ -142,12 +152,36 @@ p {
 }
 
 .card .button:hover {
-    background-color: #2980b9;
+    background-color: #c4161b; /* Darker Tesla Red */
+}
+
+.test-suite {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px; /* Increased gap */
+}
+
+.test-encrypt, .test-decrypt {
+    width: 48%;
+}
+
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: 1fr; /* Single column for smaller screens */
+    }
+
+    .test-suite {
+        flex-direction: column;
+    }
+
+    .test-encrypt, .test-decrypt {
+        width: 100%;
+    }
 }
 
 @media (max-width: 600px) {
     form {
-        padding: 15px;
+        padding: 20px; /* Adjusted padding */
     }
 
     input[type="number"] {

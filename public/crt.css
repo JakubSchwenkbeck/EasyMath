@@ -61,7 +61,7 @@ input[type="number"] {
 }
 
 button {
-    background-color: #3498db;
+    background-color: #27ae60; /* Modern Green */
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -73,7 +73,7 @@ button {
 }
 
 button:hover {
-    background-color: #2980b9;
+    background-color: #27ae60; /* Modern Green */
 }
 
 button[type="button"] {
@@ -106,7 +106,7 @@ p#result {
 }
 
 .navbar {
-    background-color: #3498db;
+    background-color: #27ae60; /* Modern Green */
     padding: 15px;
     width: 100%;
     text-align: center;
@@ -151,7 +151,7 @@ p#result {
 }
 
 .card .button {
-    background-color: #3498db;
+    background-color: #27ae60; /* Modern Green */
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -164,7 +164,7 @@ p#result {
 }
 
 .card .button:hover {
-    background-color: #2980b9;
+    background-color: #27ae60; /* Modern Green */
 }
 
 @media (max-width: 600px) {
