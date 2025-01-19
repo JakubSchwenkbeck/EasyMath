@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "test": "jest"
+    "test": "jest",
+    "cli": "ts-node src/cli.ts"
   },
   "repository": {
     "type": "git",
@@ -20,15 +21,18 @@
   },
   "homepage": "https://github.com/JakubSchwenkbeck/EasyMath#readme",
   "devDependencies": {
+    "@types/commander": "^2.12.5",
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.10.7",
     "jest": "^29.7.0",
     "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   },
   "dependencies": {
     "body-parser": "^1.20.3",
+    "commander": "^13.0.0",
     "express": "^4.21.2"
   }
 }
