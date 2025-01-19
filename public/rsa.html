@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSA Utilities</title>
+    <link rel="stylesheet" href="rsa.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        async function generateKeys(event) {
+            event.preventDefault();
+            const p = Number(document.getElementById('p').value);
+            const q = Number(document.getElementById('q').value);
+            const response = await fetch('/generate-keys', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ p, q }),
+            });
+            const result = await response.json();
+            document.getElementById('keys-result').innerText = `Public Key: (e: ${result.publicKey.e}, n: ${result.publicKey.n}), Private Key: ${result.privateKey}`;
+        }
+
+        async function encryptMessage(event) {
+            event.preventDefault();
+            const e = Number(document.getElementById('encrypt-e').value);
+            const n = Number(document.getElementById('encrypt-n').value);
+            const message = Number(document.getElementById('encrypt-message').value);
+            const response = await fetch('/encrypt', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ e, n, message }),
+            });
+            const result = await response.json();
+            document.getElementById('encrypt-result').innerText = `Encrypted Message: ${result.cipher}`;
+        }
+
+        async function decryptMessage(event) {
+            event.preventDefault();
+            const d = Number(document.getElementById('decrypt-d').value);
+            const n = Number(document.getElementById('decrypt-n').value);
+            const cipher = Number(document.getElementById('decrypt-cipher').value);
+            const response = await fetch('/decrypt', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ d, n, cipher }),
+            });
+            const result = await response.json();
+            document.getElementById('decrypt-result').innerText = `Decrypted Message: ${result.message}`;
+        }
+
+        async function signMessage(event) {
+            event.preventDefault();
+            const d = Number(document.getElementById('sign-d').value);
+            const n = Number(document.getElementById('sign-n').value);
+            const message = Number(document.getElementById('sign-message').value);
+            const response = await fetch('/sign', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ d, n, message }),
+            });
+            const result = await response.json();
+            document.getElementById('sign-result').innerText = `Signature: ${result.signature}`;
+        }
+
+        async function verifySignature(event) {
+            event.preventDefault();
+            const e = Number(document.getElementById('verify-e').value);
+            const n = Number(document.getElementById('verify-n').value);
+            const signature = Number(document.getElementById('verify-signature').value);
+            const message = Number(document.getElementById('verify-message').value);
+            const response = await fetch('/verify', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ e, n, signature, message }),
+            });
+            const result = await response.json();
+            document.getElementById('verify-result').innerText = `Verification: ${result.verified ? 'Valid' : 'Invalid'}`;
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/eea">EEA</a>
+        <a href="/crt">CRT</a>
+        <a href="/rsa">RSA</a>
+    </div>
+    <div class="container">
+        <h1>RSA Utilities</h1>
+        
+        <div class="card">
+            <h2>Generate RSA Keys</h2>
+            <form onsubmit="generateKeys(event)">
+                <label for="p">Enter prime p:</label>
+                <input type="number" id="p" name="p" required>
+                <label for="q">Enter prime q:</label>
+                <input type="number" id="q" name="q" required>
+                <button type="submit">Generate Keys</button>
+            </form>
+            <p id="keys-result"></p>
+        </div>
+
+        <div class="card">
+            <h2>Encrypt Message</h2>
+            <form onsubmit="encryptMessage(event)">
+                <label for="encrypt-e">Enter public key e:</label>
+                <input type="number" id="encrypt-e" name="e" required>
+                <label for="encrypt-n">Enter public key n:</label>
+                <input type="number" id="encrypt-n" name="n" required>
+                <label for="encrypt-message">Enter message:</label>
+                <input type="number" id="encrypt-message" name="message" required>
+                <button type="submit">Encrypt</button>
+            </form>
+            <p id="encrypt-result"></p>
+        </div>
+
+        <div class="card">
+            <h2>Decrypt Message</h2>
+            <form onsubmit="decryptMessage(event)">
+                <label for="decrypt-d">Enter private key d:</label>
+                <input type="number" id="decrypt-d" name="d" required>
+                <label for="decrypt-n">Enter public key n:</label>
+                <input type="number" id="decrypt-n" name="n" required>
+                <label for="decrypt-cipher">Enter cipher:</label>
+                <input type="number" id="decrypt-cipher" name="cipher" required>
+                <button type="submit">Decrypt</button>
+            </form>
+            <p id="decrypt-result"></p>
+        </div>
+
+        <div class="card">
+            <h2>Sign Message</h2>
+            <form onsubmit="signMessage(event)">
+                <label for="sign-d">Enter private key d:</label>
+                <input type="number" id="sign-d" name="d" required>
+                <label for="sign-n">Enter public key n:</label>
+                <input type="number" id="sign-n" name="n" required>
+                <label for="sign-message">Enter message:</label>
+                <input type="number" id="sign-message" name="message" required>
+                <button type="submit">Sign</button>
+            </form>
+            <p id="sign-result"></p>
+        </div>
+
+        <div class="card">
+            <h2>Verify Signature</h2>
+            <form onsubmit="verifySignature(event)">
+                <label for="verify-e">Enter public key e:</label>
+                <input type="number" id="verify-e" name="e" required>
+                <label for="verify-n">Enter public key n:</label>
+                <input type="number" id="verify-n" name="n" required>
+                <label for="verify-signature">Enter signature:</label>
+                <input type="number" id="verify-signature" name="signature" required>
+                <label for="verify-message">Enter message:</label>
+                <input type="number" id="verify-message" name="message" required>
+                <button type="submit">Verify</button>
+            </form>
+            <p id="verify-result"></p>
+        </div>
+    </div>
+</body>
+</html>

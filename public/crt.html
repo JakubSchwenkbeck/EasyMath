@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chinese Remainder Theorem</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="crt.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <script>
         function addRow() {
@@ -13,14 +13,15 @@
             row.className = 'form-group';
             row.innerHTML = `
                 <label>x = <input type="number" name="remainders" required> mod <input type="number" name="moduli" required></label>
-                <button type="button" onclick="removeRow(this)">Remove</button>
             `;
             container.appendChild(row);
         }
 
-        function removeRow(button) {
-            const row = button.parentNode;
-            row.parentNode.removeChild(row);
+        function removeRow() {
+            const container = document.getElementById('crt-container');
+            if (container.children.length > 1) {
+                container.removeChild(container.lastChild);
+            }
         }
 
         async function calculateCRT(event) {
@@ -44,6 +45,7 @@
         <a href="/">Home</a>
         <a href="/eea">EEA</a>
         <a href="/crt">CRT</a>
+        <a href="/rsa">RSA</a>
     </div>
     <div class="container">
         <h1>Chinese Remainder Theorem</h1>
@@ -51,7 +53,10 @@
             <div id="crt-container" class="form-group">
                 <label>x = <input type="number" name="remainders" required> mod <input type="number" name="moduli" required></label>
             </div>
-            <button type="button" onclick="addRow()">Add Row</button>
+            <div class="form-buttons">
+                <button type="button" onclick="addRow()">Add Row</button>
+                <button type="button" onclick="removeRow()">Remove Row</button>
+            </div>
             <button type="submit">Calculate</button>
         </form>
         <h2>Result:</h2>
